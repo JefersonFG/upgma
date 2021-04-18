@@ -1,8 +1,6 @@
-from collections import OrderedDict
-
 # Global variables
 
-subtree_list = OrderedDict()
+subtree_list = {}
 
 
 # Class definitions
@@ -14,8 +12,10 @@ class Subtree:
         distance_a = 0
         distance_b = 0
         if a in subtree_list:
+            self.a = subtree_list[a]
             distance_a = subtree_list[a].middle
         if b in subtree_list:
+            self.b = subtree_list[b]
             distance_b = subtree_list[b].middle
         self.middle = distance / 2
         self.distance_a = self.middle - distance_a
@@ -87,8 +87,12 @@ def join_labels(label_list, row, column):
     del label_list[column]
 
 
+def convert_subtree_to_newick_format(final_subtree):
+    tree = str(final_subtree) + ';'
+    return tree
+
+
 def upgma(labels, distance_matrix):
-    tree = '('
     while len(labels) > 1:
         # Find lowest distance
         distance, row, column = lowest_distance(distance_matrix)
@@ -109,11 +113,7 @@ def upgma(labels, distance_matrix):
         # Join the labels on the list
         join_labels(labels, row, column)
 
-    for label, subtree in subtree_list.items():
-        print(f"Subtree of label {label}: {subtree}")
-
-    tree += ");"
-    return tree
+    return convert_subtree_to_newick_format(list(subtree_list.items())[-1][1])
 
 
 # Input table

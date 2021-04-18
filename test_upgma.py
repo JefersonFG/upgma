@@ -13,7 +13,7 @@ def test_upgma():
         [8, 8, 8, 8, 8, 0]
     ]
     generated_tree = upgma(original_labels, original_distance_matrix)
-    expected_tree = "(((D:2.0,E:2.0):1.0,((A:1.0,B:1.0):1.0,C:2.0):1.0):1.0,F:4.0);"
+    expected_tree = "((((A:1.0,B:1.0):1.0,C:2.0):1.0,(D:2.0,E:2.0):1.0):1.0,F:4.0);"
     print(f"Generated tree: {generated_tree}")
-    print(f"Expected tree: {expected_tree}")
+    print(f"Expected tree:  {expected_tree}")
     assert(generated_tree == expected_tree)
